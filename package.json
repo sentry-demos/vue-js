@@ -5,19 +5,18 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 3003 --open",
     "lint": "vue-cli-service lint",
-    "deploy": "serve -s build",
+    "deploy": "vue-cli-service serve --port 3003 --open",
     "predeploy": "npm run build && make setup_release",
     "start": "REACT_APP_RELEASE=`sentry-cli releases propose-version` vue-cli-service serve --port 3003 --open",
     "build": "REACT_APP_RELEASE=`sentry-cli releases propose-version` vue-cli-service build"
   },
-
-  
   "dependencies": {
     "@sentry/browser": "^5.4.3",
     "@sentry/integrations": "^5.4.2",
     "@sentry/cli": "^1.37.0",
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "serve": "^11.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",

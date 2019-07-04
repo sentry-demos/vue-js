@@ -1,83 +1,81 @@
 <template>
   <div id="app">
-    <img id="sentryImg" alt="Sentry logo" src="./assets/sentry-logo.png">
-    <p id="greeting"> {{greetingTxt}}</p>
+    <div id="iconsDiv">
+      <img id="sentryIcon" alt="Sentry logo" src="./assets/sentry-logo.png" />
+      <p class="plus">+</p>
+      <img class="icon" alt="Vue logo" src="./assets/logo.png" />
+    </div>
+
+    <p id="greeting">{{greetingTxt}}</p>
     <div id="email-div">
-      <input id="emailInput" v-model="userEmail" placeholder="Enter email..." type="email">
-      <button class="event-button" v-on:click="submitEmail">
-        Submit
-      </button>
+      <input id="emailInput" v-model="userEmail" placeholder="Enter email..." type="email" />
+      <button class="event-button" v-on:click="submitEmail">Submit</button>
     </div>
     <div id="event-list">
-        <EventButton title="Type Error" :onClick="malformed"/>
-        <EventButton title="URIError" :onClick="uriError"/>
-        <EventButton title="SyntaxError" :onClick="syntaxError"/>
-        <EventButton title="RangeError" :onClick="rangeError"/>
+      <EventButton title="Type Error" :onClick="malformed" />
+      <EventButton title="URIError" :onClick="uriError" />
+      <EventButton title="SyntaxError" :onClick="syntaxError" />
+      <EventButton title="RangeError" :onClick="rangeError" />
     </div>
   </div>
 </template>
 
 <script>
-
-import EventButton from './components/EventButton.vue'
-import Vue from 'vue'
-import * as Sentry from '@sentry/browser';
-import * as Integrations from '@sentry/integrations';
+import EventButton from "./components/EventButton.vue";
+import Vue from "vue";
+import * as Sentry from "@sentry/browser";
+import * as Integrations from "@sentry/integrations";
 
 const HELLO = "Hello";
 
 Sentry.init({
-  dsn: 'https://bec2c6cf33f54632b7eb4667960233ed@sentry.io/1496554',
-  integrations: [new Integrations.Vue({Vue, attachProps: true})],
+  dsn: "https://bec2c6cf33f54632b7eb4667960233ed@sentry.io/1496554",
+  integrations: [new Integrations.Vue({ Vue, attachProps: true })]
 });
 
-
-
 export default {
-  name: 'app',
+  name: "app",
   components: {
     EventButton
   },
-  data: function () {
-    return { greetingTxt: HELLO, 
-            userEmail: ""
-            };
+  data: function() {
+    return { greetingTxt: HELLO, userEmail: "" };
   },
   methods: {
-    submitEmail: function(){
+    submitEmail: function() {
       Sentry.configureScope(scope => {
-        scope.setUser({email: this.userEmail});
+        scope.setUser({ email: this.userEmail });
       });
 
-      var newGreeting = HELLO + " " + this.userEmail
-      this.$set(this.$data, 'greetingTxt', newGreeting);     
+      var newGreeting = HELLO + " " + this.userEmail;
+      this.$set(this.$data, "greetingTxt", newGreeting);
     },
     malformed: function() {
-      decodeURIComponent('%');
+      decodeURIComponent("%");
     },
 
     notAFunctionError: function() {
-      var someArray = [{ func: function () {}}];
+      var someArray = [{ func: function() {} }];
       someArray[1].func();
     },
     uriError: function() {
-      decodeURIComponent('%');
+      decodeURIComponent("%");
     },
 
     syntaxError: function() {
-      eval('foo bar');
+      eval("foo bar");
     },
 
     rangeError: function() {
-      throw new RangeError('Parameter must be between 1 and 100');
+      throw new RangeError("Parameter must be between 1 and 100");
     }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -90,14 +88,14 @@ export default {
   background-size: cover;
 }
 
-#email-div{
-    width: 600px;
-    display: inline-flex;
+#email-div {
+  width: 600px;
+  display: inline-flex;
 }
 
-#emailInput{
+#emailInput {
   height: 30px;
-  width: 90%
+  width: 90%;
 }
 
 #event-list {
@@ -106,8 +104,29 @@ export default {
 }
 
 #greeting {
-      margin-bottom: 0.8rem;
-    margin-top: -2rem;
+  margin-bottom: 0.8rem;
+  margin-top: -2rem;
   font-size: 2rem;
+}
+
+.icon {
+  height: 6rem;
+  width: 6rem;
+  padding-top: 1.6rem;
+  padding-left: 2rem;
+}
+
+#sentryIcon {
+  height: 9rem;
+  width: 9rem;
+}
+
+#iconsDiv {
+  display: inline-flex;
+  padding-bottom: 2rem;
+}
+
+.plus {
+  font-size: 2.6rem;
 }
 </style>

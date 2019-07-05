@@ -30,6 +30,8 @@ const HELLO = "Hello";
 
 Sentry.init({
   dsn: "https://bec2c6cf33f54632b7eb4667960233ed@sentry.io/1496554",
+  release: process.env.VUE_APP_RELEASE,
+  environment: "prod",
   integrations: [new Integrations.Vue({ Vue, attachProps: true })]
 });
 

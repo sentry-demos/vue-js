@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <div id="iconsDiv">
-      <img id="sentryIcon" alt="Sentry logo" src="./assets/sentry-logo.png" />
-      <p class="plus">+</p>
-      <img class="icon" alt="Vue logo" src="./assets/logo.png" />
-    </div>
+      <div id="iconsDiv">
+        <img id="sentryIcon" alt="Sentry logo" src="./assets/sentry-logo.png" />
+        <p class="plus">+</p>
+        <img class="icon" alt="Vue logo" src="./assets/logo.png" />
+      </div>
 
-    <p id="greeting">{{greetingTxt}}</p>
-    <div id="email-div">
-      <input id="emailInput" v-model="userEmail" placeholder="Enter email..." type="email" />
-      <button class="event-button" v-on:click="submitEmail">Submit</button>
+      <p id="greeting">{{greetingTxt}}</p>
+      <div id="email-div">
+        <input id="emailInput" v-model="userEmail" placeholder="Enter email..." type="email" />
+        <button class="event-button" v-on:click="submitEmail">Submit</button>
+      </div>
+      <div id="event-list">
+        <EventButton title="Type Error" :onClick="notAFunctionError" />
+        <EventButton title="URIError" :onClick="uriError" />
+        <EventButton title="SyntaxError" :onClick="syntaxError" />
+        <EventButton title="RangeError" :onClick="rangeError" />
+      </div>
     </div>
-    <div id="event-list">
-      <EventButton title="Type Error" :onClick="malformed" />
-      <EventButton title="URIError" :onClick="uriError" />
-      <EventButton title="SyntaxError" :onClick="syntaxError" />
-      <EventButton title="RangeError" :onClick="rangeError" />
-    </div>
-  </div>
 </template>
 
 <script>
@@ -52,9 +52,6 @@ export default {
       var newGreeting = HELLO + " " + this.userEmail;
       this.$set(this.$data, "greetingTxt", newGreeting);
     },
-    malformed: function() {
-      decodeURIComponent("%");
-    },
 
     notAFunctionError: function() {
       var someArray = [{ func: function() {} }];
@@ -76,15 +73,16 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 900px;
 
   background-image: url("./assets/sentry-pattern.png");
-  height: 800px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

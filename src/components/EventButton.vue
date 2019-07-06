@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="event-button" @click="onClick()">{{ title }}</button>
+   <button class="event-button" @click="onClick()">{{ title }}</button>  
   </div>
 </template>
 
@@ -14,7 +14,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .event-button {
   height: 60px;

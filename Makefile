@@ -5,7 +5,6 @@
 SENTRY_ORG=testorg-az
 SENTRY_PROJECT=vue-js
 VERSION=`sentry-cli releases propose-version`
-PREFIX=js
 
 setup_release: create_release associate_commits upload_sourcemaps
 
@@ -17,4 +16,4 @@ associate_commits:
 
 upload_sourcemaps:
 	sentry-cli releases -o $(SENTRY_ORG) -p $(SENTRY_PROJECT) files $(VERSION) \
-		upload-sourcemaps --url-prefix "~/$(PREFIX)" --validate dist/$(PREFIX)
+		upload-sourcemaps --url-prefix "~/js" --rewrite --validate dist/js

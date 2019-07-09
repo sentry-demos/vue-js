@@ -1,0 +1,56 @@
+{
+  "name": "vue-js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "serve -s dist",
+    "local_serve": "VUE_APP_RELEASE=`sentry-cli releases propose-version`  vue-cli-service serve -s --port 3003 --open",
+    "lint": "vue-cli-service lint",
+    "deploy": "npm run serve",
+    "predeploy": "npm run build && make setup_release",
+    "start": "npm run serve",
+    "build": "VUE_APP_RELEASE=`sentry-cli releases propose-version` vue-cli-service build --mode production"
+  },
+  "dependencies": {
+    "@sentry/browser": "^5.5.0",
+    "@sentry/cli": "^1.37.0",
+    "@sentry/integrations": "^5.5.0",
+    "core-js": "^2.6.5",
+    "serve": "^11.0.2",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "webpack": "^4.35.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
